@@ -1,7 +1,7 @@
 ---
 title: "Overview of basic features of ggplot"
-author: "Caleb Trujillo"
-date: "`r Sys.Date()`"
+author: "Andy Hernandez-Gomez"
+date: "1/21/2026"
 output: html_document
 ---
 
@@ -19,7 +19,13 @@ Here you will make your figure. You can write a commit for each figure or error 
 p <- ggplot(data = gapminder,
             mapping = aes(x = gdpPercap,
                           y = lifeExp))
-p + geom_point() 
+p + geom_point(alpha = 0.3) + 
+  geom_smooth(method = "gam") + 
+  scale_x_log10(labels = scales::dollar) +
+  labs(x = "GDP Per Capita", y = "life expectancy in years",
+       title = "Economic Growth and Life Expectancy",
+       Subtitle = "Data points are country-years",
+       caption = "source: Gapminder.")
 
 ```
 
@@ -30,10 +36,11 @@ Here you will make your next figure.
 ```{r 3.16 plot}
 p <- ggplot(data = gapminder,
             mapping = aes(x = gdpPercap,
-                          y = lifeExp,
-                          color = continent,
-                          fill = lifeExp))
-p + geom_smooth()
+                          y = lifeExp))
+p + geom_point(mapping = aes(color = continent)) +
+  geom_smooth(method = "loess") +
+  scale_x_log10()
+
 ```
 
 
@@ -41,6 +48,15 @@ p + geom_smooth()
 
 Continue practicing by accessing an unfamiliar data set from another package.
 You can load a dataset of your choice to show you can build a graphic using ggplot layers.
-Here are some sample data sets [https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html](https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html)
+Here are some sample data sets [https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html](https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html)  
 
+```{r Orignal Graph}
+p <- ggplot(data = gapminder, 
+            mapping = aes(x = lifeExp,
+                  y = gdpPercap))
+p + geom_point(color = "blue") +
+  geom_smooth(method = "loess")
+scale_x_log10(labels = scales::dollar)
+     
+```
 
