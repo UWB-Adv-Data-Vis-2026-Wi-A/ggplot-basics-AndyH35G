@@ -50,4 +50,13 @@ Continue practicing by accessing an unfamiliar data set from another package.
 You can load a dataset of your choice to show you can build a graphic using ggplot layers.
 Here are some sample data sets [https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html](https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html)  
 
+```{r Orignal Graph}
+p <- ggplot(data = gapminder, 
+            mapping = aes(x = lifeExp,
+                  y = gdpPercap))
+p + geom_point(color = "blue") +
+  geom_smooth(method = "loess")
+scale_x_log10(labels = scales::dollar)
+     
+```
 
